@@ -22,6 +22,20 @@ export default {
                 },
             ],
         },
+        {
+            label: 'Load and play video',
+            action: 'loadAndPlayVideo',
+            args: [
+                {
+                    name: 'Video URL',
+                    type: 'text',
+                },
+                {
+                    name: 'Start Time',
+                    type: 'number',
+                },
+            ],
+        },
     ],
     triggerEvents: [
         { name: 'play', label: { en: 'On play' }, event: { value: '' }, default: true },

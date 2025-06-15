@@ -175,6 +175,29 @@ export default {
             if (!this.player) return;
             this.player.seekTo(time);
         },
+        loadAndPlayVideo(videoUrl, startTime = 0) {
+            if (!this.player) return;
+            
+            const videoId = this.extractVideoId(videoUrl);
+            if (!videoId) return;
+            
+            // This preserves the user gesture and works on iOS
+            this.player.loadVideoById({
+                videoId: videoId,
+                startSeconds: startTime,
+            });
+        },
+        extractVideoId(url) {
+            if (!url || typeof url !== 'string') return '';
+            
+            if (url.indexOf('youtube.com') !== -1) {
+                return url.split('v=')[1].split('?')[0];
+            } else if (url.indexOf('youtu.be') !== -1) {
+                return url.split('be/')[1].split('?')[0];
+            }
+            
+            return '';
+        },
     },
     beforeUnmount() {
         clearInterval(this.timeUpdater);
